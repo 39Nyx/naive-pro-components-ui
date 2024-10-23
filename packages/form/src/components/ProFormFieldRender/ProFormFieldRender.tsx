@@ -1,8 +1,8 @@
-import { type ProField } from '../../entity/ProField'
 import ProInput from '../ProInput/ProInput.vue'
 import ProSelect from '../ProSelect/ProSelect.vue'
+import { type ProFieldColumn } from '../../entity'
 
-type ProFormFieldRenderProps = Omit<ProField, 'key' | 'title' | 'span'>
+type ProFormFieldRenderProps = Omit<ProFieldColumn, 'key' | 'span'>
 
 const ProFormFieldRender = (props: ProFormFieldRenderProps) => {
   let component: any = null

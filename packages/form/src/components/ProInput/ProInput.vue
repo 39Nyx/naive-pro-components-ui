@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NInput } from 'naive-ui'
-import { ProInputProps } from '../props/ProInputProps'
+import { type ProInputProps } from '../props/ProInputProps'
 import { computed } from 'vue'
 
 const model = defineModel<string>()

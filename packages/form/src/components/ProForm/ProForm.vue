@@ -4,7 +4,7 @@ import { omit } from 'lodash'
 import ProFormFieldRender from '../ProFormFieldRender/ProFormFieldRender'
 import type { ProField } from '../../entity/ProField'
 import { NCard, NForm, NGrid, NGi, NFormItem, NButton, NSpace } from 'naive-ui'
-import { ProFieldColumn } from '../../entity'
+import { type ProFieldColumn } from '../../entity'
 
 interface Props {
   columns?: ProField[]
@@ -32,7 +32,7 @@ watch(
   },
 )
 
-function fieldProps(column: ProFieldColumn): ProFieldColumn {
+function fieldProps(column: ProFieldColumn): any {
   return {
     ...omit(column, ['key', 'span']),
     clearable: column.clearable === undefined ? true : column.clearable

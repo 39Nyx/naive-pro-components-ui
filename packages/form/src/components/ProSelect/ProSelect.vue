@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { NSelect } from 'naive-ui'
 import { computed } from 'vue'
-
-interface ProSelectProps {
-  options: any[]
-  placeholder?: string
-  title?: string
-}
+import { type ProSelectProps } from '../props/ProSelectProps'
 
 const model = defineModel<string>()
 
