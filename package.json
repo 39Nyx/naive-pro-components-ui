@@ -15,12 +15,16 @@
   },
   "dependencies": {
     "@he/pro-form": "workspace:^",
+    "less": "^4.2.0",
+    "lodash": "^4.17.21",
+    "naive-ui": "^2.40.1",
     "pinia": "^2.2.4",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
+    "@types/lodash": "^4.17.12",
     "@types/node": "^20.16.11",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
