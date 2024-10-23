@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { type ProFieldColumn, ProForm } from '@he/naive-pro-components'
+import { NButton } from 'naive-ui'
+import axios from 'axios'
 
 const columns: ProFieldColumn[] = [
   {
@@ -46,8 +48,17 @@ const columns: ProFieldColumn[] = [
     ],
   },
 ]
+
+function handleClick() {
+  console.log('点击了按钮')
+  // 发送请求测试
+  axios.get('https://apifoxmock.com/m1/5341971-5012913-default/system/test').then((res) => {
+    console.log(res.data)
+  })
+}
 </script>
 
 <template>
   <ProForm :columns="columns" />
+  <NButton @click="handleClick">发送请求测试</NButton>
 </template>
