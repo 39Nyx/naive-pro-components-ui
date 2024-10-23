@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@he/naive-pro-components": "workspace:^",
+    "axios": "^1.7.7",
     "less": "^4.2.0",
     "lodash": "^4.17.21",
     "naive-ui": "^2.40.1",
