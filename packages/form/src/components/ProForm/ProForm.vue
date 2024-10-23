@@ -21,7 +21,7 @@ watch(
     if (!newVal) {
       return
     }
-    model.value = newVal.reduce((acc, cur) => {
+    model.value = newVal.reduce((acc: Record<string, any>, cur: ProField) => {
       acc[cur.key] = ''
       return acc
     }, {})
@@ -31,7 +31,7 @@ watch(
   },
 )
 
-function fieldProps(column: any): ProField {
+function fieldProps(column: any): any {
   return omit(column, ['key', 'title', 'span'])
 }
 
@@ -68,7 +68,6 @@ function submitForm() {
 <style scoped lang="less">
 .form-btn {
   :nth-child(n + 2) {
-    //margin-left: 8px;
   }
 }
 </style>
