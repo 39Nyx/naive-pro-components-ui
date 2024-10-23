@@ -18,4 +18,19 @@ export interface ProField {
    * 字段类型
    */
   valueType?: string
+
+  /**
+   * 字段描述
+   */
+  placeholder?: string
+
+  /**
+   * 是否禁用
+   */
+  disabled?: boolean
+
+  /**
+   * 是否显示清除按钮
+   */
+  clearable?: boolean
 }
