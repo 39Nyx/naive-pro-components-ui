@@ -4,7 +4,12 @@
     "target": "esnext",
     "module": "ESNext",
     "moduleResolution": "node",
-    "jsx": "react-jsx",
+    "jsx": "preserve",
+    "jsxFragmentFactory": "Fragment",
+    "types": [
+      "vue/jsx",
+      "jest"
+    ],
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "strict": true,
@@ -16,5 +21,7 @@
     "paths": {
     }
   },
-  "include": ["./src"]
+  "include": [
+    "./src"
+  ]
 }
