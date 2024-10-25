@@ -10,6 +10,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@he/pro-form": "workspace:^"
+    "@he/pro-form": "workspace:^",
+    "@he/pro-layout": "workspace:^"
   }
 }
