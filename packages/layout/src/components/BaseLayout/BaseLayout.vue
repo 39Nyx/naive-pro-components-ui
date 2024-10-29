@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h, ref, Ref } from 'vue'
+import { h, ref, type Ref } from 'vue'
 import { RouterView } from 'vue-router'
 import {
   NLayout,
