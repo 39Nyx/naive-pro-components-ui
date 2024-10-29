@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h } from 'vue'
+import { h, ref, Ref } from 'vue'
 import { RouterView } from 'vue-router'
 import {
   NLayout,
@@ -24,7 +24,7 @@ function renderIcon(icon: Component) {
 
 const menuOptions = [
   {
-    label: '且听风吟',
+    label: '首页',
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon),
   },
@@ -96,40 +96,94 @@ const menuOptions = [
     ],
   },
 ]
+
+const collapsedStatus: Ref<boolean> = ref(false)
+
+function handleCollapsed(collapsed: boolean) {
+  collapsedStatus.value = collapsed
+}
 </script>
 
 <template>
-  <NLayout has-sider class="layout">
-    <NLayoutSider
-      bordered
-      show-trigger
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      :native-scrollbar="false"
-    >
-      <NMenu
+  <div style="position: relative; height: 100%">
+    <n-layout has-sider style="height: 100%">
+      <n-layout-sider
+        bordered
+        show-trigger
+        collapse-mode="width"
         :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-      />
-    </NLayoutSider>
-    <NLayout>
-      <NLayoutHeader>颐和园路</NLayoutHeader>
-      <NLayoutContent content-style="padding: 24px;">
-        <RouterView />
-      </NLayoutContent>
-      <NLayoutFooter>成府路</NLayoutFooter>
-    </NLayout>
-  </NLayout>
+        :width="240"
+        :native-scrollbar="false"
+        :on-update:collapsed="handleCollapsed"
+      >
+        <div
+          class="side-header"
+          :class="{
+            'is-collapsed': collapsedStatus,
+          }"
+        >
+          <img src="../../assets/img/naiveLogo.svg" alt="logo" class="logo" />
+          <div class="title">管理系统</div>
+        </div>
+        <NMenu
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+        />
+      </n-layout-sider>
+
+      <n-layout>
+        <n-layout-header></n-layout-header>
+        <n-layout-content content-style="padding: 24px;">
+          <RouterView />
+        </n-layout-content>
+        <n-layout-footer></n-layout-footer>
+      </n-layout>
+    </n-layout>
+  </div>
 </template>
 
 <style scoped lang="less">
 .layout {
   height: 100%;
+  position: relative;
+}
+
+.side-header {
+  position: sticky;
+  top: 0;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  z-index: 2;
+  width: calc(100% - 2px);
+  margin: 0 auto;
+
+  &.is-collapsed {
+    .title {
+      width: 0;
+      overflow: hidden;
+      text-wrap: nowrap;
+    }
+  }
+
+  .logo {
+    width: 20.8px;
+    height: 25.3px;
+  }
+
+  .title {
+    font-weight: 700;
+    color: #18a058;
+    margin-left: 8px;
+    transition: width 0.3s ease-in-out;
+    width: auto;
+  }
 }
 
 :deep(.n-layout-sider .n-layout-toggle-button) {
-  top: 80px;
+  top: 68px;
 }
 </style>
