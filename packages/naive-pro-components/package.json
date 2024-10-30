@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@he/pro-form": "workspace:^",
-    "@he/pro-layout": "workspace:^"
+    "@he/pro-layout": "workspace:^",
+    "@he/pro-table": "workspace:^"
   }
 }
