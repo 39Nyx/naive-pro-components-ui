@@ -9,6 +9,8 @@ import {
   NLayoutFooter,
   NMenu,
   NIcon,
+  NDropdown,
+  NAvatar,
 } from 'naive-ui'
 import { type Component } from 'vue'
 
@@ -16,6 +18,8 @@ import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon,
+  LogOutOutline as LogoutIcon,
+  PersonCircleOutline as UserIcon,
 } from '@vicons/ionicons5'
 
 function renderIcon(icon: Component) {
@@ -97,6 +101,19 @@ const menuOptions = [
   },
 ]
 
+const options = [
+  {
+    label: '用户资料',
+    key: 'profile',
+    icon: renderIcon(UserIcon),
+  },
+  {
+    label: '退出登录',
+    key: 'logout',
+    icon: renderIcon(LogoutIcon),
+  },
+]
+
 const collapsedStatus: Ref<boolean> = ref(false)
 
 function handleCollapsed(collapsed: boolean) {
@@ -133,7 +150,21 @@ function handleCollapsed(collapsed: boolean) {
       </n-layout-sider>
 
       <n-layout>
-        <n-layout-header></n-layout-header>
+        <n-layout-header bordered class="layout-header">
+          <n-menu mode="horizontal" :options="menuOptions" />
+          <div class="header-right">
+            <n-dropdown trigger="click" :options="options">
+              <div class="avatar">
+                <n-avatar
+                  round
+                  size="small"
+                  src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+                />
+                <span class="navbar-name">Soybean</span>
+              </div>
+            </n-dropdown>
+          </div>
+        </n-layout-header>
         <n-layout-content content-style="padding: 24px;">
           <RouterView />
         </n-layout-content>
@@ -180,6 +211,32 @@ function handleCollapsed(collapsed: boolean) {
     margin-left: 8px;
     transition: width 0.3s ease-in-out;
     width: auto;
+  }
+}
+
+.layout-header {
+  height: 52px;
+  display: flex;
+  align-items: center;
+
+  .header-right {
+    padding-right: 16px;
+
+    .avatar {
+      padding: 4px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+
+      &:hover {
+        background: rgba(46, 51, 56, 0.09);
+        color: rgb(51, 54, 57);
+      }
+
+      .navbar-name {
+        margin-left: 8px;
+      }
+    }
   }
 }
 
