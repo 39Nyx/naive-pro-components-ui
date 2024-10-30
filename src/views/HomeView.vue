@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { type ProFieldColumn, ProForm } from '@he/naive-pro-components'
-import { NButton } from 'naive-ui'
+import {
+  type ProColumns,
+  type ProFieldColumn,
+  ProForm,
+  ProTable,
+} from '@he/naive-pro-components'
+import { NButton, NTag } from 'naive-ui'
 import axios from 'axios'
+import { h } from 'vue'
 
 const columns: ProFieldColumn[] = [
   {
@@ -16,14 +22,14 @@ const columns: ProFieldColumn[] = [
     key: 'password',
     valueType: 'input',
     span: 12,
-    type: 'password'
+    type: 'password',
   },
   {
     title: '多行文本',
     key: 'textarea',
     valueType: 'input',
     span: 24,
-    type: 'textarea'
+    type: 'textarea',
   },
   {
     title: 'Email',
@@ -49,16 +55,33 @@ const columns: ProFieldColumn[] = [
   },
 ]
 
+const tableColumns: ProColumns[] = [
+  {
+    title: '序号',
+    key: 'index',
+  },
+  {
+    title: '名称',
+    key: 'name',
+    render: () => {
+      return h(NTag, { type: 'success' }, () => '标签内容')
+    },
+  },
+]
+
 function handleClick() {
   console.log('点击了按钮')
   // 发送请求测试
-  axios.get('https://apifoxmock.com/m1/5341971-5012913-default/system/test').then((res) => {
-    console.log(res.data)
-  })
+  axios
+    .get('https://apifoxmock.com/m1/5341971-5012913-default/system/test')
+    .then(res => {
+      console.log(res.data)
+    })
 }
 </script>
 
 <template>
+  <pro-table :columns="tableColumns" />
   <ProForm :columns="columns" />
   <NButton @click="handleClick">发送请求测试</NButton>
 </template>
