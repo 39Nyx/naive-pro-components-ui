@@ -165,7 +165,7 @@ function handleCollapsed(collapsed: boolean) {
             </n-dropdown>
           </div>
         </n-layout-header>
-        <n-layout-content content-style="padding: 24px;">
+        <n-layout-content content-style="padding: 12px;" class="layout-content">
           <RouterView />
         </n-layout-content>
         <n-layout-footer></n-layout-footer>
@@ -238,6 +238,11 @@ function handleCollapsed(collapsed: boolean) {
       }
     }
   }
+}
+
+.layout-content {
+  background: rgb(247, 250, 252);
+  height: calc(100% - 52px);
 }
 
 :deep(.n-layout-sider .n-layout-toggle-button) {
