@@ -14,6 +14,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@he/low-code": "workspace:^",
     "@he/naive-pro-components": "workspace:^",
     "@vicons/ionicons5": "^0.12.0",
     "axios": "^1.7.7",
