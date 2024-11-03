@@ -11,6 +11,16 @@ type Item = {
 }
 
 const list: Ref<Item[]> = ref([])
+
+const selectId: Ref<string> = ref('')
+
+function clickHandle(item: Item) {
+  if (item.id === selectId.value) {
+    selectId.value = ''
+    return
+  }
+  selectId.value = item.id
+}
 </script>
 
 <template>
@@ -21,11 +31,17 @@ const list: Ref<Item[]> = ref([])
     ghostClass="ghost"
     class="sheet-panel"
   >
-    <DraggableRender
+    <div
       v-for="item in list"
       :key="item.id"
-      v-bind="item"
-    />
+      class="item"
+      :class="{ selected: item.id === selectId }"
+      @click="clickHandle(item)"
+    >
+      <DraggableRender v-bind="item" />
+      <div class="wrapper"></div>
+    </div>
+
   </VueDraggable>
 </template>
 
@@ -35,5 +51,26 @@ const list: Ref<Item[]> = ref([])
   background: #ffffff;
   margin: 12px;
   padding: 12px;
+
+  .item {
+    position: relative;
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    transition: all 0.3s ease;
+
+    &.selected {
+      border-color: #1890ff;
+    }
+
+    .wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+  }
 }
 </style>
