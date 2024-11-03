@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VueDraggable } from 'vue-draggable-plus'
-import { Ref, ref } from 'vue'
+import { type Ref, ref } from 'vue'
 import DraggableRender from '../DraggableRender/DraggableRender'
 
 type Item = {

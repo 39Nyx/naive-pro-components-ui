@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VueDraggable } from 'vue-draggable-plus'
-import { Ref, ref } from 'vue'
+import { type Ref, ref } from 'vue'
 import { NCollapse, NCollapseItem } from 'naive-ui'
 
 const group: Ref<any> = ref({
