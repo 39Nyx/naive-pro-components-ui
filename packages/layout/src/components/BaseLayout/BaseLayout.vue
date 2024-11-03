@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { h, ref, type Ref } from 'vue'
-import { RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 import {
   NLayout,
   NLayoutSider,
@@ -28,26 +28,33 @@ function renderIcon(icon: Component) {
 
 const menuOptions = [
   {
-    label: '首页',
+    label: () => {
+      return h(
+        RouterLink,
+        {
+          to: {
+            name: 'home'
+          }
+        },
+        { default: () => '首页' }
+      )
+    },
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon),
   },
   {
-    label: '1973年的弹珠玩具',
-    key: 'pinball-1973',
-    icon: renderIcon(BookIcon),
-    disabled: true,
-    children: [
-      {
-        label: '鼠',
-        key: 'rat',
-      },
-    ],
-  },
-  {
-    label: '寻羊冒险记',
+    label: () => {
+      return h(
+        RouterLink,
+        {
+          to: {
+            name: 'about',
+          }
+        },
+        { default: () => '表单设计' }
+      )
+    },
     key: 'a-wild-sheep-chase',
-    disabled: true,
     icon: renderIcon(BookIcon),
   },
   {
