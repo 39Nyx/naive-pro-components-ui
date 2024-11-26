@@ -42,6 +42,12 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm run build
+      - name: 编译文档
+        run: pnpm run docs:build
+      - name: 在dist目录下新建docs目录
+        run: mkdir -p dist/docs
+      - name: 将文档内容移动到dist目录
+        run: mv packages/docs/docs-dist/* dist/docs/
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
