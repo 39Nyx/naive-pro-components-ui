@@ -7,10 +7,10 @@ export default defineConfig({
   themeConfig: {
     name: '文档',
   },
-  // presets: [require.resolve('@dumijs/preset-vue')],
-  // vue: {
-  //   compiler: {
-  //     babelStandaloneCDN: '/js/babel.min.js'
-  //   }
-  // }
+  presets: [require.resolve('@dumijs/preset-vue')],
+  vue: {
+    compiler: {
+      babelStandaloneCDN: '/js/babel.min.js'
+    }
+  }
 });
