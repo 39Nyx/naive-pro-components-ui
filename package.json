@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" -- && node ./scripts/copyIndex.js",
     "lib:form": "pnpm --filter @he/pro-form build",
+    "docs:dev": "pnpm --filter @he/docs dev",
+    "docs:build": "pnpm --filter @he/docs docs:build",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
