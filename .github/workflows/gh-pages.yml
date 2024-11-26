@@ -44,7 +44,7 @@ jobs:
         run: pnpm run build
       - name: 编译文档
         run: pnpm run docs:build
-        timeout-minutes: 0.5
+        timeout-minutes: 1
       - name: 在dist目录下新建docs目录
         run: mkdir -p dist/docs
       - name: 将文档内容移动到dist目录
