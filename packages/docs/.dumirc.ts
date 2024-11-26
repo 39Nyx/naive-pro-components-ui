@@ -1,8 +1,8 @@
 import { defineConfig } from 'dumi';
 
 export default defineConfig({
-  base: '/docs/',
-  publicPath: '/docs/',
+  base: '/naive-pro-components-ui/docs/',
+  publicPath: '/naive-pro-components-ui/docs/',
   outputPath: 'docs-dist',
   themeConfig: {
     name: '文档',
