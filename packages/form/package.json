@@ -1,8 +1,10 @@
 {
-  "name": "@he/pro-form",
-  "private": true,
-  "version": "1.0.0",
+  "name": "@39nyx/pro-form",
+  "version": "0.0.1-alpha.1",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist"
   ],
