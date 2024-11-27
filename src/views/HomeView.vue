@@ -4,7 +4,7 @@ import {
   type ProFieldColumn,
   ProForm,
   ProTable,
-} from '@he/naive-pro-components'
+} from '@39nyx/naive-pro-components'
 import { NButton, NTag } from 'naive-ui'
 import axios from 'axios'
 import { h } from 'vue'

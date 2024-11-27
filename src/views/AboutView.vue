@@ -4,5 +4,5 @@
 
 <style></style>
 <script setup lang="ts">
-import { LowCode } from '@he/low-code'
+import { LowCode } from '@39nyx/low-code'
 </script>
