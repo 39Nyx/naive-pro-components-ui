@@ -1,5 +1,5 @@
 {
-  "name": "@he/low-code",
+  "name": "@39nyx/low-code",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -15,8 +15,8 @@
     "vite-plugin-dts": "^4.2.4"
   },
   "dependencies": {
-    "@he/pro-form": "workspace:^",
-    "@he/pro-table": "workspace:^",
+    "@39nyx/pro-form": "workspace:^",
+    "@39nyx/pro-table": "workspace:^",
     "vue-draggable-plus": "^0.5.6"
   }
 }

@@ -1,5 +1,5 @@
-import { ProForm } from '@he/pro-form';
-import { ProTable } from '@he/pro-table';
+import { ProForm } from '@39nyx/pro-form';
+import { ProTable } from '@39nyx/pro-table';
 
 function getComponent(componentName: string) {
   if (componentName === 'ProForm') {

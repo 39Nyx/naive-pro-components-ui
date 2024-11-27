@@ -1,5 +1,5 @@
 {
-  "name": "@he/naive-pro-components",
+  "name": "@39nyx/naive-pro-components",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -10,8 +10,8 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@he/pro-form": "workspace:^",
-    "@he/pro-layout": "workspace:^",
-    "@he/pro-table": "workspace:^"
+    "@39nyx/pro-form": "workspace:^",
+    "@39nyx/pro-layout": "workspace:^",
+    "@39nyx/pro-table": "workspace:^"
   }
 }
