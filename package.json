@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" -- && node ./scripts/copyIndex.js",
-    "lib:form": "pnpm --filter @he/pro-form build",
-    "docs:dev": "pnpm --filter @he/docs dev",
-    "docs:build": "pnpm --filter @he/docs docs:build",
+    "lib:form": "pnpm --filter @39nyx/pro-form build",
+    "docs:dev": "pnpm --filter @39nyx/docs dev",
+    "docs:build": "pnpm --filter @39nyx/docs docs:build",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
@@ -16,8 +16,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@he/low-code": "workspace:^",
-    "@he/naive-pro-components": "workspace:^",
+    "@39nyx/low-code": "workspace:^",
+    "@39nyx/naive-pro-components": "workspace:^",
     "@vicons/ionicons5": "^0.12.0",
     "axios": "^1.7.7",
     "less": "^4.2.0",
