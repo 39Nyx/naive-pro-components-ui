@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { h, ref, type Ref } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
 import {
   NLayout,
   NLayoutSider,
@@ -16,11 +16,12 @@ import { type Component } from 'vue'
 
 import {
   BookOutline as BookIcon,
-  PersonOutline as PersonIcon,
   WineOutline as WineIcon,
   LogOutOutline as LogoutIcon,
   PersonCircleOutline as UserIcon,
 } from '@vicons/ionicons5'
+
+const router = useRouter()
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -28,18 +29,8 @@ function renderIcon(icon: Component) {
 
 const menuOptions = [
   {
-    label: () => {
-      return h(
-        RouterLink,
-        {
-          to: {
-            name: 'home'
-          }
-        },
-        { default: () => '首页' }
-      )
-    },
-    key: 'hear-the-wind-sing',
+    label: '首页',
+    key: 'home',
     icon: renderIcon(BookIcon),
   },
   {
@@ -58,26 +49,13 @@ const menuOptions = [
     icon: renderIcon(BookIcon),
   },
   {
-    label: '舞，舞，舞',
+    label: '表单',
     key: 'dance-dance-dance',
     icon: renderIcon(BookIcon),
     children: [
       {
-        type: 'group',
-        label: '人物',
-        key: 'people',
-        children: [
-          {
-            label: '叙事者',
-            key: 'narrator',
-            icon: renderIcon(PersonIcon),
-          },
-          {
-            label: '羊男',
-            key: 'sheep-man',
-            icon: renderIcon(PersonIcon),
-          },
-        ],
+        label: '基础表单',
+        key: 'base-form'
       },
       {
         label: '饮品',
@@ -126,6 +104,12 @@ const collapsedStatus: Ref<boolean> = ref(false)
 function handleCollapsed(collapsed: boolean) {
   collapsedStatus.value = collapsed
 }
+
+function handleCollapsedMenu(name: string) {
+  router.push({
+    name: name
+  })
+}
 </script>
 
 <template>
@@ -153,6 +137,7 @@ function handleCollapsed(collapsed: boolean) {
           :collapsed-width="64"
           :collapsed-icon-size="22"
           :options="menuOptions"
+          :on-update:value="handleCollapsedMenu"
         />
       </n-layout-sider>
 
