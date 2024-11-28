@@ -1,4 +1,4 @@
-import { type ProField } from '../../entity/ProField'
+import { type ProField } from '../../entity'
 
 export type ProInputProps = Omit<ProField, 'key'> & {
   /**
