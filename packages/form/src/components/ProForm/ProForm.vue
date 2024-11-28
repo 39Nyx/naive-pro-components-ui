@@ -16,6 +16,13 @@ const props = withDefaults(defineProps<Props>(), {
 
 const model: Ref<any> = ref({})
 
+function getFieldDefaultValue(column: ProFieldColumn) {
+  if (column.valueType === 'select') {
+    return null
+  }
+  return ''
+}
+
 watch(
   () => props.columns,
   newVal => {
@@ -23,7 +30,7 @@ watch(
       return
     }
     model.value = newVal.reduce((acc: Record<string, any>, cur: ProField) => {
-      acc[cur.key] = ''
+      acc[cur.key] = getFieldDefaultValue(cur)
       return acc
     }, {})
   },
