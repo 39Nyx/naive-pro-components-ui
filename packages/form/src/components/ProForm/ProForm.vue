@@ -17,8 +17,12 @@ const props = withDefaults(defineProps<Props>(), {
 const model: Ref<any> = ref({})
 
 function getFieldDefaultValue(column: ProFieldColumn) {
-  if (column.valueType === 'select') {
-    return null
+  const defaultValue = {
+    select: null,
+    inputNumber: null
+  }
+  if (Object.hasOwnProperty.call(defaultValue, column.valueType)) {
+    return defaultValue[column.valueType]
   }
   return ''
 }

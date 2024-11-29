@@ -1,6 +1,7 @@
 import ProInput from '../ProInput/ProInput.vue'
 import ProSelect from '../ProSelect/ProSelect.vue'
 import { type ProFieldColumn } from '../../entity'
+import ProInputNumber from '../ProInputNumber/ProInputNumber.vue'
 
 type ProFormFieldRenderProps = Omit<ProFieldColumn, 'key' | 'span'>
 
@@ -10,6 +11,8 @@ const ProFormFieldRender = (props: ProFormFieldRenderProps) => {
     component = <ProInput {...props} />
   } else if (props.valueType === 'select') {
     component = <ProSelect {...props} />
+  } else if (props.valueType === 'inputNumber') {
+    component = <ProInputNumber {...props} />
   }
   return component
 }
