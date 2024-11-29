@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<ProSelectProps>(), {
   options: () => [],
   placeholder: '',
   title: '',
+  clearable: true,
 })
 
 const showPlaceholder = computed(() => {
@@ -21,6 +22,7 @@ const showPlaceholder = computed(() => {
     v-model:value="model"
     :options="props.options"
     :placeholder="showPlaceholder"
+    :clearable="props.clearable"
   />
 </template>
 
