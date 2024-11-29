@@ -19,7 +19,8 @@ const model: Ref<any> = ref({})
 function getFieldDefaultValue(column: ProFieldColumn) {
   const defaultValue = {
     select: null,
-    inputNumber: null
+    inputNumber: null,
+    datePicker: null,
   }
   if (Object.hasOwnProperty.call(defaultValue, column.valueType)) {
     return defaultValue[column.valueType]

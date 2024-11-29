@@ -17,7 +17,7 @@ export interface ProField {
   /**
    * 字段类型
    */
-  valueType?: 'input' | 'select' | 'inputNumber'
+  valueType?: 'input' | 'select' | 'inputNumber' | 'datePicker'
 
   /**
    * 字段描述
