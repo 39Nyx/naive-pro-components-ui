@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { NDatePicker } from 'naive-ui'
-import { ProDatePickerProps } from '../props/ProDatePickerProps'
+import { type ProDatePickerProps } from '../props/ProDatePickerProps'
 import { computed } from 'vue'
 
-const model = defineModel()
+const model = defineModel<number | [number, number] | null>()
 
 const props = withDefaults(defineProps<ProDatePickerProps>(), {
   type: 'date',

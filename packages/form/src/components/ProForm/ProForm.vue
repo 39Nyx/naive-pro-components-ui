@@ -17,12 +17,12 @@ const props = withDefaults(defineProps<Props>(), {
 const model: Ref<any> = ref({})
 
 function getFieldDefaultValue(column: ProFieldColumn) {
-  const defaultValue = {
+  const defaultValue: any = {
     select: null,
     inputNumber: null,
     datePicker: null,
   }
-  if (Object.hasOwnProperty.call(defaultValue, column.valueType)) {
+  if (column.valueType && Object.hasOwnProperty.call(defaultValue, column.valueType)) {
     return defaultValue[column.valueType]
   }
   return ''
@@ -47,7 +47,7 @@ watch(
 function fieldProps(column: ProFieldColumn): any {
   return {
     ...omit(column, ['key', 'span']),
-    clearable: column.clearable === undefined ? true : column.clearable
+    clearable: column.clearable === undefined ? true : column.clearable,
   }
 }
 
