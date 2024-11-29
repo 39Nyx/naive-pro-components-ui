@@ -5,7 +5,7 @@ const columns: ProFieldColumn[] = [
   {
     key: 'age',
     title: '年龄',
-    valueType: 'input',
+    valueType: 'inputNumber',
   },
   {
     key: 'sex',
@@ -32,6 +32,11 @@ const columns: ProFieldColumn[] = [
     title: '重复密码',
     valueType: 'input',
   },
+  {
+    key: 'birthday',
+    title: '生日',
+    valueType: 'datePicker'
+  }
 ]
 </script>
 
