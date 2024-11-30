@@ -13,5 +13,8 @@
     "@vitejs/plugin-vue": "^5.1.4",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "vite-plugin-dts": "^4.2.4"
+  },
+  "dependencies": {
+    "@39nyx/pro-form": "workspace:0.0.1-alpha.1"
   }
 }
