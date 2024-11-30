@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { ProLayout } from '@39nyx/naive-pro-components'
 import FormRouter from '../module/form/router/index'
+import TableRouter from '../module/table/router/index'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,7 +14,7 @@ const router = createRouter({
         {
           path: '',
           name: 'home',
-          component: () => import('../views/HomeView.vue')
+          component: () => import('../views/HomeView.vue'),
         },
         {
           path: 'about',
@@ -21,12 +22,13 @@ const router = createRouter({
           // route level code-splitting
           // this generates a separate chunk (About.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
-          component: () => import('../views/AboutView.vue')
+          component: () => import('../views/AboutView.vue'),
         },
-        ...FormRouter
-      ]
-    }
-  ]
+        ...FormRouter,
+        ...TableRouter,
+      ],
+    },
+  ],
 })
 
 export default router
