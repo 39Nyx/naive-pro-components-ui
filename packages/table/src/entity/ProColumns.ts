@@ -10,4 +10,8 @@ export interface ProColumns {
   title: string
 
   render?: any
+
+  valueType?: 'input'
+
+  span?: number
 }
