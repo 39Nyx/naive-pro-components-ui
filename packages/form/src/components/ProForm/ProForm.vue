@@ -2,7 +2,7 @@
 import { type Ref, ref, watch } from 'vue'
 import { omit } from 'lodash'
 import ProFormFieldRender from '../ProFormFieldRender/ProFormFieldRender'
-import type { ProField } from '../../entity/ProField'
+import type { ProField } from '../../entity'
 import { NCard, NForm, NGrid, NGi, NFormItem, NButton, NSpace } from 'naive-ui'
 import { type ProFieldColumn } from '../../entity'
 
@@ -72,11 +72,15 @@ function submitForm() {
             />
           </NFormItem>
         </NGi>
+        <n-gi
+          :span="8"
+        >
+          <NSpace reverse>
+            <NButton>重置</NButton>
+            <NButton type="primary" @click="submitForm">提交</NButton>
+          </NSpace>
+        </n-gi>
       </NGrid>
-      <NSpace>
-        <NButton>重置</NButton>
-        <NButton type="primary" @click="submitForm">提交</NButton>
-      </NSpace>
     </NForm>
   </NCard>
 </template>
