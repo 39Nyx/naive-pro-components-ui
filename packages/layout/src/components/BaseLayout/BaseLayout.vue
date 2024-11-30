@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { h, ref, type Ref } from 'vue'
-import { RouterLink, RouterView, useRouter } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 import {
   NLayout,
   NLayoutSider,
@@ -34,18 +34,8 @@ const menuOptions = [
     icon: renderIcon(BookIcon),
   },
   {
-    label: () => {
-      return h(
-        RouterLink,
-        {
-          to: {
-            name: 'about',
-          }
-        },
-        { default: () => '表单设计' }
-      )
-    },
-    key: 'a-wild-sheep-chase',
+    label: '表单设计',
+    key: 'about',
     icon: renderIcon(BookIcon),
   },
   {
@@ -55,32 +45,18 @@ const menuOptions = [
     children: [
       {
         label: '基础表单',
-        key: 'base-form'
+        key: 'base-form',
       },
+    ],
+  },
+  {
+    label: '表格',
+    key: 'table',
+    icon: renderIcon(WineIcon),
+    children: [
       {
-        label: '饮品',
-        key: 'beverage',
-        icon: renderIcon(WineIcon),
-        children: [
-          {
-            label: '威士忌',
-            key: 'whisky',
-          },
-        ],
-      },
-      {
-        label: '食物',
-        key: 'food',
-        children: [
-          {
-            label: '三明治',
-            key: 'sandwich',
-          },
-        ],
-      },
-      {
-        label: '过去增多，未来减少',
-        key: 'the-past-increases-the-future-recedes',
+        label: '基础表格',
+        key: 'base-table',
       },
     ],
   },
@@ -107,7 +83,7 @@ function handleCollapsed(collapsed: boolean) {
 
 function handleCollapsedMenu(name: string) {
   router.push({
-    name: name
+    name: name,
   })
 }
 </script>
