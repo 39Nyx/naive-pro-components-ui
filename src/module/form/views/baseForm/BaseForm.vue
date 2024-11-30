@@ -36,6 +36,12 @@ const columns: ProFieldColumn[] = [
     key: 'birthday',
     title: '生日',
     valueType: 'datePicker'
+  },
+  {
+    key: 'time',
+    title: '日期时间',
+    valueType: 'datePicker',
+    type: 'datetime'
   }
 ]
 </script>
