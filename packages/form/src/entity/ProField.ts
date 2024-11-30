@@ -1,4 +1,4 @@
-export interface ProField {
+export type ProField = {
   /**
    * 字段名
    */
