@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Ref, ref, watch } from 'vue'
+import { computed, type Ref, ref, watch } from 'vue'
 import { omit } from 'lodash'
 import ProFormFieldRender from '../ProFormFieldRender/ProFormFieldRender'
 import type { ProField } from '../../entity'
@@ -51,6 +51,29 @@ function fieldProps(column: ProFieldColumn): any {
   }
 }
 
+const cols: number = 24
+
+const submitSpan = computed(() => {
+  const result = props.columns.reduce((pre, current) => {
+    if (typeof current.span === 'number') {
+      if (pre.span + current.span > cols) {
+        pre.span = current.span
+      } else {
+        pre.span += current.span
+      }
+    }
+    if (typeof current.span === 'undefined') {
+      pre.span = 0
+    }
+    return pre
+  }, {
+    span: 0
+  })
+  return {
+    span: cols - result.span || cols
+  }
+})
+
 function submitForm() {
   console.log(model.value)
 }
@@ -59,7 +82,7 @@ function submitForm() {
 <template>
   <NCard :bordered="false" class="card-wrapper">
     <NForm label-placement="left" label-width="auto" :model="model">
-      <NGrid cols="24">
+      <NGrid :cols="cols">
         <NGi
           v-for="column in props.columns"
           :key="column.key"
@@ -73,7 +96,7 @@ function submitForm() {
           </NFormItem>
         </NGi>
         <n-gi
-          :span="8"
+          v-bind="submitSpan"
         >
           <NSpace reverse>
             <NButton>重置</NButton>
