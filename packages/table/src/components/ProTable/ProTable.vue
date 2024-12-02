@@ -27,6 +27,20 @@ const submitter = ref<Submitter>({
     resetText: '重置',
   },
 })
+
+
+const waitTime = (time: number = 100) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, time);
+  });
+};
+
+async function searchSubmit(values: any) {
+  console.log(values)
+  await waitTime(3000);
+}
 </script>
 
 <template>
@@ -34,6 +48,7 @@ const submitter = ref<Submitter>({
     class="pro-form-card"
     :columns="formColumns"
     :submitter="submitter"
+    :on-finish="searchSubmit"
   />
   <n-card>
     <n-data-table
