@@ -12,4 +12,5 @@ export type Submitter = {
 export type ProFormProps = {
   columns?: ProField[]
   submitter?: Submitter
+  onFinish?: (values: any) => Promise<void>
 }

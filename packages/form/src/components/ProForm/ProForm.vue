@@ -85,8 +85,18 @@ const submitSpan = computed(() => {
   }
 })
 
+const submitLoading = ref(false)
+
 function submitForm() {
-  console.log(model.value)
+  const submit = props.onFinish || ((value: any) => Promise.resolve(value))
+  submitLoading.value = true
+  submit(model.value)
+    .then(() => {
+      // 空函数
+    })
+    .finally(() => {
+      submitLoading.value = false
+    })
 }
 </script>
 
@@ -108,7 +118,11 @@ function submitForm() {
         </NGi>
         <n-gi v-bind="submitSpan">
           <NSpace reverse>
-            <NButton type="primary" @click="submitForm">
+            <NButton
+              type="primary"
+              :loading="submitLoading"
+              @click="submitForm"
+            >
               {{ props.submitter.searchConfig?.submitText }}
             </NButton>
             <NButton>{{ props.submitter.searchConfig?.resetText }}</NButton>
