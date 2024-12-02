@@ -5,13 +5,18 @@ import ProFormFieldRender from '../ProFormFieldRender/ProFormFieldRender'
 import type { ProField } from '../../entity'
 import { NCard, NForm, NGrid, NGi, NFormItem, NButton, NSpace } from 'naive-ui'
 import { type ProFieldColumn } from '../../entity'
+import type { ProFormProps } from '../props/ProFormProps'
 
-interface Props {
-  columns?: ProField[]
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<ProFormProps>(), {
   columns: () => [],
+  submitter: () => {
+    return {
+      searchConfig: {
+        submitText: '提交',
+        resetText: '重置',
+      },
+    }
+  },
 })
 
 const model: Ref<any> = ref({})
@@ -22,7 +27,10 @@ function getFieldDefaultValue(column: ProFieldColumn) {
     inputNumber: null,
     datePicker: null,
   }
-  if (column.valueType && Object.hasOwnProperty.call(defaultValue, column.valueType)) {
+  if (
+    column.valueType &&
+    Object.hasOwnProperty.call(defaultValue, column.valueType)
+  ) {
     return defaultValue[column.valueType]
   }
   return ''
@@ -54,23 +62,26 @@ function fieldProps(column: ProFieldColumn): any {
 const cols: number = 24
 
 const submitSpan = computed(() => {
-  const result = props.columns.reduce((pre, current) => {
-    if (typeof current.span === 'number') {
-      if (pre.span + current.span > cols) {
-        pre.span = current.span
-      } else {
-        pre.span += current.span
+  const result = props.columns.reduce(
+    (pre, current) => {
+      if (typeof current.span === 'number') {
+        if (pre.span + current.span > cols) {
+          pre.span = current.span
+        } else {
+          pre.span += current.span
+        }
       }
-    }
-    if (typeof current.span === 'undefined') {
-      pre.span = 0
-    }
-    return pre
-  }, {
-    span: 0
-  })
+      if (typeof current.span === 'undefined') {
+        pre.span = 0
+      }
+      return pre
+    },
+    {
+      span: 0,
+    },
+  )
   return {
-    span: cols - result.span || cols
+    span: cols - result.span || cols,
   }
 })
 
@@ -95,12 +106,12 @@ function submitForm() {
             />
           </NFormItem>
         </NGi>
-        <n-gi
-          v-bind="submitSpan"
-        >
+        <n-gi v-bind="submitSpan">
           <NSpace reverse>
-            <NButton>重置</NButton>
-            <NButton type="primary" @click="submitForm">提交</NButton>
+            <NButton type="primary" @click="submitForm">
+              {{ props.submitter.searchConfig?.submitText }}
+            </NButton>
+            <NButton>{{ props.submitter.searchConfig?.resetText }}</NButton>
           </NSpace>
         </n-gi>
       </NGrid>
@@ -108,9 +119,4 @@ function submitForm() {
   </NCard>
 </template>
 
-<style scoped lang="less">
-.form-btn {
-  :nth-child(n + 2) {
-  }
-}
-</style>
+<style scoped lang="less"></style>
