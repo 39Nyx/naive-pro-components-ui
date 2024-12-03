@@ -98,6 +98,10 @@ function submitForm() {
       submitLoading.value = false
     })
 }
+
+defineExpose({
+  submitForm
+})
 </script>
 
 <template>
