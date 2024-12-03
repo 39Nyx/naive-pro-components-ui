@@ -2,9 +2,9 @@
 import { NDataTable, NCard } from 'naive-ui'
 import { type ProTableProps } from '../../props/ProTableProps'
 import { ProForm, type Submitter } from '@39nyx/pro-form'
-import { computed, Ref, ref } from 'vue'
+import { computed, type Ref, ref } from 'vue'
 import ProToolBar from '../ProToolBar/ProToolBar.vue'
-import { ProTableSize } from '../../props/ProToolBarProps'
+import { type ProTableSize } from '../../props/ProToolBarProps'
 
 const props = withDefaults(defineProps<ProTableProps>(), {
   columns: () => [],
@@ -38,7 +38,7 @@ const waitTime = (time: number = 100) => {
   })
 }
 
-const proFormElement: Ref<ProForm> = ref<ProForm>()
+const proFormElement: Ref = ref()
 const loading: Ref<boolean> = ref(false)
 
 async function searchSubmit(values: any) {

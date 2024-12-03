@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ProTableSize, ProToolBarProps } from '../../props/ProToolBarProps'
+import type { ProTableSize, ProToolBarProps } from '../../props/ProToolBarProps'
 import { NSpace } from 'naive-ui'
 import SettingButton from './components/settingButton/SettingButton.vue'
 import ReloadButton from './components/reloadButton/ReloadButton.vue'
@@ -13,7 +13,7 @@ withDefaults(defineProps<ProToolBarProps>(), {
 
 const emit = defineEmits<{
   (e: 'reload'): void
-  (e: 'sizeUpdate', size: ProTableSize)
+  (e: 'sizeUpdate', size: ProTableSize): void
 }>()
 
 function reload() {

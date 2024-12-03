@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NButton, NTooltip, NDropdown } from 'naive-ui'
-import { h, type Ref, ref } from 'vue'
-import { ProTableSize } from '../../../../props/ProToolBarProps'
+import { h, type Ref, ref, type VNode } from 'vue'
+import { type ProTableSize } from '../../../../props/ProToolBarProps'
 import DensityButtonItem from './components/densityButtonItem/DensityButtonItem.vue'
 
 withDefaults(
@@ -15,8 +15,10 @@ withDefaults(
 
 const options: Ref<
   {
-    label: string
-    key: ProTableSize
+    label?: string
+    key: ProTableSize,
+    type?: 'render',
+    render?: () => VNode
   }[]
 > = ref([
   {
@@ -39,7 +41,7 @@ const options: Ref<
 ])
 
 const emit = defineEmits<{
-  (e: 'updateSize', size: ProTableSize)
+  (e: 'updateSize', size: ProTableSize): void
 }>()
 
 function handleSelect(key: ProTableSize) {
