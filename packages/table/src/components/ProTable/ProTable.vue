@@ -2,7 +2,9 @@
 import { NDataTable, NCard } from 'naive-ui'
 import { type ProTableProps } from '../../props/ProTableProps'
 import { ProForm, type Submitter } from '@39nyx/pro-form'
-import { computed, ref } from 'vue'
+import { computed, Ref, ref } from 'vue'
+import ProToolBar from '../ProToolBar/ProToolBar.vue'
+import { ProTableSize } from '../../props/ProToolBarProps'
 
 const props = withDefaults(defineProps<ProTableProps>(), {
   columns: () => [],
@@ -28,34 +30,57 @@ const submitter = ref<Submitter>({
   },
 })
 
-
 const waitTime = (time: number = 100) => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
+      resolve(true)
+    }, time)
+  })
+}
+
+const proFormElement: Ref<ProForm> = ref<ProForm>()
+const loading: Ref<boolean> = ref(false)
 
 async function searchSubmit(values: any) {
   console.log(values)
-  await waitTime(3000);
+  loading.value = true
+  await waitTime(3000)
+  loading.value = false
+}
+
+function reload() {
+  proFormElement.value?.submitForm()
+}
+
+const tableSize: Ref<ProTableSize> = ref('medium')
+
+function sizeUpdate(size: ProTableSize) {
+  tableSize.value = size
 }
 </script>
 
 <template>
   <pro-form
+    ref="proFormElement"
     class="pro-form-card"
     :columns="formColumns"
     :submitter="submitter"
     :on-finish="searchSubmit"
   />
   <n-card>
+    <pro-tool-bar
+      :loading="loading"
+      :size="tableSize"
+      @reload="reload"
+      @sizeUpdate="sizeUpdate"
+    />
     <n-data-table
       :columns="columns"
       :data="data"
       :pagination="pagination"
       :bordered="false"
+      :loading="loading"
+      :size="tableSize"
     />
   </n-card>
 </template>
