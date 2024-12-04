@@ -4,7 +4,7 @@ import { h, type Ref, ref, type VNode } from 'vue'
 import { type ProTableSize } from '../../../../props/ProToolBarProps'
 import DensityButtonItem from './components/densityButtonItem/DensityButtonItem.vue'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     size: ProTableSize
   }>(),
@@ -16,14 +16,23 @@ withDefaults(
 const options: Ref<
   {
     label?: string
-    key: ProTableSize,
-    type?: 'render',
+    key: ProTableSize
+    type?: 'render'
     render?: () => VNode
   }[]
 > = ref([
   {
-    label: '宽松',
     key: 'large',
+    type: 'render',
+    render: () => {
+      return h(DensityButtonItem, {
+        text: '宽松',
+        selected: props.size === 'large',
+        onSelect: () => {
+          handleSelect('large')
+        }
+      })
+    },
   },
   {
     key: 'medium',
@@ -31,12 +40,25 @@ const options: Ref<
     render: () => {
       return h(DensityButtonItem, {
         text: '中等',
+        selected: props.size === 'medium',
+        onSelect: () => {
+          handleSelect('medium')
+        }
       })
-    }
+    },
   },
   {
-    label: '紧凑',
     key: 'small',
+    type: 'render',
+    render: () => {
+      return h(DensityButtonItem, {
+        text: '紧凑',
+        selected: props.size === 'small',
+        onSelect: () => {
+          handleSelect('small')
+        }
+      })
+    },
   },
 ])
 
@@ -45,6 +67,7 @@ const emit = defineEmits<{
 }>()
 
 function handleSelect(key: ProTableSize) {
+  debugger
   emit('updateSize', key)
 }
 </script>
@@ -53,7 +76,7 @@ function handleSelect(key: ProTableSize) {
   <n-tooltip>
     <template #trigger>
       <div>
-        <n-dropdown trigger="click" :options="options" @select="handleSelect">
+        <n-dropdown trigger="click" :options="options">
           <n-button text>
             <template #icon>
               <svg
@@ -73,14 +96,9 @@ function handleSelect(key: ProTableSize) {
           </n-button>
         </n-dropdown>
       </div>
-
     </template>
     密度
   </n-tooltip>
 </template>
 
-<style scoped>
-.density-button-item {
-  color: #ffff00;
-}
-</style>
+<style scoped></style>
