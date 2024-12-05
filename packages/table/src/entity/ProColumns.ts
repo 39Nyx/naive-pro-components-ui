@@ -14,4 +14,14 @@ export interface ProColumns {
   valueType?: 'input'
 
   span?: number
+
+  /**
+   * 是否固定列
+   */
+  fixed?: 'left' | 'right' | false
+
+  /**
+   * 在 Table 中不展示此列
+   */
+  hideInTable?: boolean
 }
