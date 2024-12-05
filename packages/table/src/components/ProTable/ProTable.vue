@@ -2,9 +2,10 @@
 import { NDataTable, NCard } from 'naive-ui'
 import { type ProTableProps } from '../../props/ProTableProps'
 import { ProForm, type Submitter } from '@39nyx/pro-form'
-import { computed, type Ref, ref } from 'vue'
+import { computed, type Ref, ref, toRef } from 'vue'
 import ProToolBar from '../ProToolBar/ProToolBar.vue'
 import { type ProTableSize } from '../../props/ProToolBarProps'
+import { ProColumns } from '../../entity'
 
 const props = withDefaults(defineProps<ProTableProps>(), {
   columns: () => [],
@@ -22,6 +23,8 @@ const formColumns = computed(() => {
     }
   })
 })
+
+const tableColumns = toRef(props.columns)
 
 const submitter = ref<Submitter>({
   searchConfig: {
@@ -57,6 +60,10 @@ const tableSize: Ref<ProTableSize> = ref('medium')
 function sizeUpdate(size: ProTableSize) {
   tableSize.value = size
 }
+
+function updateColumns(data: ProColumns[]) {
+  tableColumns.value = data
+}
 </script>
 
 <template>
@@ -71,11 +78,13 @@ function sizeUpdate(size: ProTableSize) {
     <pro-tool-bar
       :loading="loading"
       :size="tableSize"
+      :columns="tableColumns"
       @reload="reload"
       @sizeUpdate="sizeUpdate"
+      @updateColumns="updateColumns"
     />
     <n-data-table
-      :columns="columns"
+      :columns="tableColumns.filter(column => !column.hideInTable)"
       :data="data"
       :pagination="pagination"
       :bordered="false"
