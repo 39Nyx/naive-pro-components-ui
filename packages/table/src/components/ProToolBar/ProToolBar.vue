@@ -16,7 +16,7 @@ withDefaults(defineProps<ProToolBarProps>(), {
 const emit = defineEmits<{
   (e: 'reload'): void
   (e: 'sizeUpdate', size: ProTableSize): void
-  (e: 'updateColumns', columns: ProColumns[])
+  (e: 'updateColumns', columns: ProColumns[]): void
 }>()
 
 function reload() {

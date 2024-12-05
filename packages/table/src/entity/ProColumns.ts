@@ -18,7 +18,7 @@ export interface ProColumns {
   /**
    * 是否固定列
    */
-  fixed?: 'left' | 'right' | false
+  fixed?: 'left' | 'right'
 
   /**
    * 在 Table 中不展示此列

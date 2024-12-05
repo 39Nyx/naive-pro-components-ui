@@ -36,7 +36,7 @@ watch(
 )
 
 const emit = defineEmits<{
-  (e: 'updateColumns', columns: ProColumns[])
+  (e: 'updateColumns', columns: ProColumns[]): void
 }>()
 
 function updateColumns() {

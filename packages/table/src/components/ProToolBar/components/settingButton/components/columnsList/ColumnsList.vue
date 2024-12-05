@@ -15,7 +15,7 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<{
-  (e: 'update:columns', columns: ProColumns[])
+  (e: 'update:columns', columns: ProColumns[]): void
 }>()
 
 function checkedChange(column: ProColumns) {

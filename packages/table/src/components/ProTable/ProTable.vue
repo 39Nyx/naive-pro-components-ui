@@ -5,7 +5,7 @@ import { ProForm, type Submitter } from '@39nyx/pro-form'
 import { computed, type Ref, ref, toRef } from 'vue'
 import ProToolBar from '../ProToolBar/ProToolBar.vue'
 import { type ProTableSize } from '../../props/ProToolBarProps'
-import { ProColumns } from '../../entity'
+import { type ProColumns } from '../../entity'
 
 const props = withDefaults(defineProps<ProTableProps>(), {
   columns: () => [],
