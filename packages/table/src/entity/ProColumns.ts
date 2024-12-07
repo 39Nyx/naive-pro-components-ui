@@ -24,4 +24,9 @@ export interface ProColumns {
    * 在 Table 中不展示此列
    */
   hideInTable?: boolean
+
+  /**
+   * 表格宽度
+   */
+  width?: number
 }
