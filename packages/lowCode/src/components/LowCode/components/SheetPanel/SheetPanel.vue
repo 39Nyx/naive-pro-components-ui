@@ -45,7 +45,7 @@ function clickHandle(item: Item) {
   </VueDraggable>
 </template>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .sheet-panel {
   flex: 1;
   background: #ffffff;

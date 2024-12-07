@@ -142,7 +142,7 @@ function handleCollapsedMenu(name: string) {
   </div>
 </template>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .layout {
   height: 100%;
   position: relative;

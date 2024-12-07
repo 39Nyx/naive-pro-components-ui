@@ -88,7 +88,7 @@ function checkAllColumns(value: boolean) {
   </div>
 </template>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .columns-setting-container {
   background-color: #ffffff;
   background-clip: padding-box;
