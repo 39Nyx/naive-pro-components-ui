@@ -7,13 +7,16 @@ import {
   WineOutline as WineIcon,
 } from '@vicons/ionicons5'
 
-const collapsedStatus: Ref<boolean> = ref(false)
 const router = useRouter()
 const route = useRoute()
-
-function handleCollapsed(collapsed: boolean) {
-  collapsedStatus.value = collapsed
-}
+withDefaults(
+  defineProps<{
+    collapsed: boolean
+  }>(),
+  {
+    collapsed: false,
+  },
+)
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -67,16 +70,16 @@ function handleCollapsedMenu(name: string) {
 <template>
   <n-layout-sider
     bordered
-    collapse-mode="width"
+    :collapsed="collapsed"
     :collapsed-width="64"
+    collapse-mode="width"
     :width="240"
     :native-scrollbar="false"
-    :on-update:collapsed="handleCollapsed"
   >
     <div
       class="side-header"
       :class="{
-        'is-collapsed': collapsedStatus,
+        'is-collapsed': collapsed,
       }"
     >
       <img src="../../assets/img/naiveLogo.svg" alt="logo" class="logo" />
@@ -86,6 +89,7 @@ function handleCollapsedMenu(name: string) {
       v-model:value="selectedKey"
       :collapsed-width="64"
       :collapsed-icon-size="22"
+      :collapsed="collapsed"
       :options="menuOptions"
       :on-update:value="handleCollapsedMenu"
     />
