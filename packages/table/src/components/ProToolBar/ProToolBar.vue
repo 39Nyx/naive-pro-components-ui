@@ -48,7 +48,7 @@ function updateColumns(data: ProColumns[]) {
   </div>
 </template>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .pro-toolbar {
   display: flex;
   align-content: center;
