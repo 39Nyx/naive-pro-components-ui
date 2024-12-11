@@ -4,6 +4,7 @@ import { NLayout, NLayoutHeader, NLayoutContent, NLayoutFooter } from 'naive-ui'
 import LayoutSide from '../LayoutSide/LayoutSide.vue'
 import LayoutHeader from '../LayoutHeader/LayoutHeader.vue'
 import { ref } from 'vue'
+import TabsView from '../TabsView/TabsView.vue'
 
 const collapsed = ref(false)
 
@@ -23,8 +24,11 @@ function toggle(value: boolean) {
         >
           <layout-header :collapsed="collapsed" @toggle="toggle" />
         </n-layout-header>
-        <n-layout-content content-style="padding: 12px;" class="layout-content">
-          <RouterView />
+        <n-layout-content class="layout-content">
+          <tabs-view />
+          <div class="router-view">
+            <RouterView />
+          </div>
         </n-layout-content>
         <n-layout-footer></n-layout-footer>
       </n-layout>
@@ -45,5 +49,11 @@ function toggle(value: boolean) {
 .layout-content {
   background: rgb(247, 250, 252);
   height: calc(100% - 52px);
+  position: relative;
+}
+
+.router-view {
+  padding: 12px;
+  height: calc(100% - 44px);
 }
 </style>
