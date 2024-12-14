@@ -90,6 +90,8 @@ function updateColumns(data: ProColumns[]) {
       :bordered="false"
       :loading="loading"
       :size="tableSize"
+      :max-height="250"
+      :scroll-x="1000"
     />
   </n-card>
 </template>

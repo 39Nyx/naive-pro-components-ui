@@ -24,6 +24,11 @@ function checkedChange(column: ProColumns) {
     emit('update:columns', props.columns)
   }
 }
+
+function fixedLeft(column: ProColumns) {
+  column.fixed = 'left'
+  emit('update:columns', props.columns)
+}
 </script>
 
 <template>
@@ -41,7 +46,7 @@ function checkedChange(column: ProColumns) {
       <div class="flex">
         <n-tooltip v-if="column.fixed !== 'left'" trigger="hover">
           <template #trigger>
-            <up-move-icon class="icon" />
+            <up-move-icon @click="fixedLeft(column)" class="icon" />
           </template>
           固定在首列
         </n-tooltip>
