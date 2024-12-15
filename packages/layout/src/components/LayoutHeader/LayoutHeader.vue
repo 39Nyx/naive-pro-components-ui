@@ -4,7 +4,7 @@ import {
   LogOutOutline as LogoutIcon,
   PersonCircleOutline as UserIcon,
 } from '@vicons/ionicons5'
-import { Component, h } from 'vue'
+import { type Component, h } from 'vue'
 import MenuButton from './components/MenuButton/MenuButton.vue'
 
 function renderIcon(icon: Component) {
