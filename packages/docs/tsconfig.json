@@ -10,8 +10,8 @@
     "baseUrl": "./",
     "paths": {
       "@@/*": [".dumi/tmp/*"],
-      "@he/docs": ["src"],
-      "@he/docs/*": ["src/*", "*"]
+      "@39nyx/docs": ["src"],
+      "@39nyx/docs/*": ["src/*", "*"]
     }
   },
   "include": [".dumirc.ts", "src/**/*"]

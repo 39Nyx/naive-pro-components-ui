@@ -1,23 +1,23 @@
-# @he/docs
+# docs
 
-[![NPM version](https://img.shields.io/npm/v/@he/docs.svg?style=flat)](https://npmjs.org/package/@he/docs)
-[![NPM downloads](http://img.shields.io/npm/dm/@he/docs.svg?style=flat)](https://npmjs.org/package/@he/docs)
+[![NPM version](https://img.shields.io/npm/v/docs.svg?style=flat)](https://npmjs.org/package/docs)
+[![NPM downloads](http://img.shields.io/npm/dm/docs.svg?style=flat)](https://npmjs.org/package/docs)
 
-A vue library developed with dumi
+文档说明
 
 ## Usage
 
 First, introduce css file:
 
 ```ts
-import '@he&#x2F;docs/dist/style.css';
+import 'docs/dist/style.css';
 ```
 
 Then, introduce components:
 
 ```html
 <script setup lang="ts">
-  import { Foo, Bar } from '@he&#x2F;docs';
+  import { Foo, Bar } from 'docs';
 </script>
 ```
 
