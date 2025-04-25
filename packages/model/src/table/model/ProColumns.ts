@@ -1,8 +1,13 @@
-export interface ProColumns {
+export type ProColumns = {
   /**
    * 字段名
    */
-  key: string
+  key?: string
+
+  /**
+   *
+   */
+  dataIndex?: string | string[];
 
   /**
    * 字段标题
