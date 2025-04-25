@@ -10,6 +10,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@39nyx/model": "workspace:^",
     "@39nyx/pro-form": "workspace:^",
     "@39nyx/pro-layout": "workspace:^",
     "@39nyx/pro-table": "workspace:^"
