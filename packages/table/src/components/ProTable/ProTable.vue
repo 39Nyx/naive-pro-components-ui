@@ -8,6 +8,9 @@ import { type ProTableSize } from '../../props/ProToolBarProps'
 import { type ProColumns } from '../../entity'
 
 const props = withDefaults(defineProps<ProTableProps>(), {
+  /**
+   * 表格列配置
+   */
   columns: () => [],
   data: () => [],
   pagination: { pageSize: 10 },
@@ -18,7 +21,7 @@ const formColumns = computed(() => {
     return {
       key: column.key,
       title: column.title,
-      valueType: column?.valueType,
+      valueType: column?.valueType || 'input',
       span: column.span || 8,
     }
   })
