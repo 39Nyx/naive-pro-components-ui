@@ -1,1 +1,1 @@
-export * from './ProColumns'
+export * from '@39nyx/model'
