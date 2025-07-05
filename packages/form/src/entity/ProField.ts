@@ -40,4 +40,19 @@ export type ProField = {
    * 校验规则
    */
   rules?: FormItemRule[]
+
+  /**
+   * 依赖字段, 用于处理联动
+   */
+  dependencies?: string[] | string[][]
+
+  /**
+   * 联动控制字段, 用于处理联动
+   */
+  controls?: string[]
+
+  /**
+   * 控制是否隐藏
+   */
+  hidden?: boolean | ((value: any) => boolean)
 }

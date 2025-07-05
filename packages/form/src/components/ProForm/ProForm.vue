@@ -65,7 +65,7 @@ watch(
 
 function fieldProps(column: ProFieldColumn): any {
   return {
-    ...omit(column, ['key', 'span']),
+    ...omit(column, ['key', 'span', 'hidden', 'dependencies', 'controls']),
     clearable: column.clearable === undefined ? true : column.clearable,
   }
 }
@@ -118,6 +118,45 @@ function submitForm(e: MouseEvent) {
   })
 }
 
+const renderColumns = computed(() => {
+  return props.columns.filter((item: ProField) => {
+    if (typeof item?.hidden === 'function') {
+      const params: any = {}
+      if (item.dependencies) {
+        item.dependencies.forEach(dep => {
+          if (typeof dep === 'string') {
+            params[dep] = model.value[dep]
+          } else if (Array.isArray(dep)) {
+            if (dep.length < 1) {
+              return
+            } else if (dep.length === 1) {
+              params[dep[0]] = model.value[dep[0]]
+              return
+            } else if (dep.length > 1) {
+              if (!Object.hasOwnProperty.call(params, dep[0])) {
+                params[dep[0]] = {}
+              }
+              let current = params[dep[0]]
+              dep.forEach((d, index) => {
+                if (index === 0) {
+                  return
+                } else if (index === dep.length - 1) {
+                  current[d] = model.value[d]
+                } else {
+                  current[d] = {}
+                  current = current[key]
+                }
+              })
+            }
+          }
+        })
+      }
+      return !item.hidden(params)
+    }
+    return !item.hidden
+  })
+})
+
 defineExpose({
   submitForm,
 })
@@ -133,7 +172,7 @@ defineExpose({
     >
       <NGrid :cols="cols" item-responsive :x-gap="12" :responsive="'screen'">
         <NGi
-          v-for="column in props.columns"
+          v-for="column in renderColumns"
           :key="column.key"
           :span="column.span || 24"
         >
