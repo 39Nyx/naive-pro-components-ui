@@ -100,7 +100,7 @@ function submitForm() {
 }
 
 defineExpose({
-  submitForm
+  submitForm,
 })
 </script>
 
@@ -111,7 +111,7 @@ defineExpose({
         <NGi
           v-for="column in props.columns"
           :key="column.key"
-          :span="'24 m:12 l:8 xxl:6'"
+          :span="column.span || 24"
         >
           <NFormItem :label="column.title" :path="column.key">
             <ProFormFieldRender
@@ -120,18 +120,20 @@ defineExpose({
             />
           </NFormItem>
         </NGi>
-        <n-gi v-bind="submitSpan">
-          <NSpace reverse>
-            <NButton
-              type="primary"
-              :loading="submitLoading"
-              @click="submitForm"
-            >
-              {{ props.submitter.searchConfig?.submitText }}
-            </NButton>
-            <NButton>{{ props.submitter.searchConfig?.resetText }}</NButton>
-          </NSpace>
-        </n-gi>
+        <NGi v-bind="submitSpan">
+          <NFormItem label=" ">
+            <NSpace>
+              <NButton>{{ props.submitter.searchConfig?.resetText }}</NButton>
+              <NButton
+                type="primary"
+                :loading="submitLoading"
+                @click="submitForm"
+              >
+                {{ props.submitter.searchConfig?.submitText }}
+              </NButton>
+            </NSpace>
+          </NFormItem>
+        </NGi>
       </NGrid>
     </NForm>
   </NCard>
