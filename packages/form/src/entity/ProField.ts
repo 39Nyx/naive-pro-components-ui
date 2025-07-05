@@ -1,3 +1,5 @@
+import type { FormItemRule } from 'naive-ui'
+
 export type ProField = {
   /**
    * 字段名
@@ -33,4 +35,9 @@ export type ProField = {
    * 是否显示清除按钮
    */
   clearable?: boolean
+
+  /**
+   * 校验规则
+   */
+  rules?: FormItemRule[]
 }

@@ -1,9 +1,18 @@
 <script setup lang="ts">
-import { computed, type Ref, ref, watch } from 'vue'
+import { computed, type Ref, ref, useTemplateRef, watch } from 'vue'
 import { omit } from 'lodash'
 import ProFormFieldRender from '../ProFormFieldRender/ProFormFieldRender'
 import type { ProField } from '../../entity'
-import { NCard, NForm, NGrid, NGi, NFormItem, NButton, NSpace } from 'naive-ui'
+import {
+  NCard,
+  NForm,
+  NGrid,
+  NGi,
+  NFormItem,
+  NButton,
+  NSpace,
+  FormInst,
+} from 'naive-ui'
 import { type ProFieldColumn } from '../../entity'
 import type { ProFormProps } from '../props/ProFormProps'
 
@@ -17,9 +26,11 @@ const props = withDefaults(defineProps<ProFormProps>(), {
       },
     }
   },
+  onFinish: async () => {},
 })
 
 const model: Ref<any> = ref({})
+const formRef = useTemplateRef<FormInst>('formRef')
 
 function getFieldDefaultValue(column: ProFieldColumn) {
   const defaultValue: any = {
@@ -87,16 +98,24 @@ const submitSpan = computed(() => {
 
 const submitLoading = ref(false)
 
-function submitForm() {
-  const submit = props.onFinish || ((value: any) => Promise.resolve(value))
+function submitForm(e: MouseEvent) {
+  e.preventDefault()
   submitLoading.value = true
-  submit(model.value)
-    .then(() => {
-      // 空函数
-    })
-    .finally(() => {
+  formRef.value?.validate(valid => {
+    console.log(valid)
+    if (valid) {
       submitLoading.value = false
-    })
+      return
+    }
+    props
+      .onFinish(model.value)
+      .then(() => {
+        // 空函数
+      })
+      .finally(() => {
+        submitLoading.value = false
+      })
+  })
 }
 
 defineExpose({
@@ -106,14 +125,23 @@ defineExpose({
 
 <template>
   <NCard :bordered="true" class="card-wrapper">
-    <NForm label-placement="left" label-width="auto" :model="model">
+    <NForm
+      label-placement="left"
+      label-width="auto"
+      :model="model"
+      ref="formRef"
+    >
       <NGrid :cols="cols" item-responsive :x-gap="12" :responsive="'screen'">
         <NGi
           v-for="column in props.columns"
           :key="column.key"
           :span="column.span || 24"
         >
-          <NFormItem :label="column.title" :path="column.key">
+          <NFormItem
+            :label="column.title"
+            :path="column.key"
+            :rule="column.rules"
+          >
             <ProFormFieldRender
               v-model:value="model[column.key]"
               v-bind="fieldProps(column)"
