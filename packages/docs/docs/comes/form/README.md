@@ -22,6 +22,14 @@ group:
 
 ## 表单联动
 
+### 一对一联动
+
+<code src="./demos/OneToOneFormDemo.vue"></code>
+
+### 链式联动
+
+<code src="./demos/ChainedFormDemo.vue"></code>
+
 ## 自定义表单组件
 
 ## 表单提交
