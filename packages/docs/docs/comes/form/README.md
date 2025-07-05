@@ -16,7 +16,9 @@ group:
 
 ## 栅格化布局
 
+通过设置`span`适配不同分辨率表单所占栅格数, `m`以下占`24`列, `m`占`12`列, `l`占`8`列, `xl`占`6`列
 
+<code src="./demos/GridFormDemo.vue"></code>
 
 ## 表单联动
 
