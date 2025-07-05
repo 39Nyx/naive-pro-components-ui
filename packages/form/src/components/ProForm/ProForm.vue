@@ -105,13 +105,13 @@ defineExpose({
 </script>
 
 <template>
-  <NCard :bordered="false" class="card-wrapper">
+  <NCard :bordered="true" class="card-wrapper">
     <NForm label-placement="left" label-width="auto" :model="model">
-      <NGrid :cols="cols">
+      <NGrid :cols="cols" item-responsive :x-gap="12" :responsive="'screen'">
         <NGi
           v-for="column in props.columns"
           :key="column.key"
-          :span="column.span || 24"
+          :span="'24 m:12 l:8 xxl:6'"
         >
           <NFormItem :label="column.title" :path="column.key">
             <ProFormFieldRender
