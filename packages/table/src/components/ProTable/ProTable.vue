@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NDataTable, NCard } from 'naive-ui'
 import { type ProTableProps } from '../../props/ProTableProps'
-import { ProForm, type Submitter } from '@39nyx/pro-form'
+import { type ProField, ProForm, type Submitter } from '@39nyx/pro-form'
 import { computed, type Ref, ref, toRef } from 'vue'
 import ProToolBar from '../ProToolBar/ProToolBar.vue'
 import { type ProTableSize } from '../../props/ProToolBarProps'
@@ -16,18 +16,18 @@ const props = withDefaults(defineProps<ProTableProps>(), {
   pagination: { pageSize: 10 },
 })
 
-const formColumns = computed(() => {
+const formColumns = computed<ProField[]>(() => {
   return props.columns.map(column => {
     return {
       key: column.key,
       title: column.title,
       valueType: column?.valueType || 'input',
-      span: column.span || 8,
-    }
+      span: column.span || '24 m:12 l:8 xxl:6',
+    } as ProField
   })
 })
 
-const tableColumns = toRef(props.columns)
+const tableColumns = toRef<any[]>(props.columns)
 
 const submitter = ref<Submitter>({
   searchConfig: {
