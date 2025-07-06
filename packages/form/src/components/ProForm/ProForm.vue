@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, type Ref, ref, useTemplateRef, watch } from 'vue'
+import { computed, type Ref, ref, useTemplateRef, watch, provide } from 'vue'
 import { omit } from 'lodash'
 import ProFormFieldRender from '../ProFormFieldRender/ProFormFieldRender'
 import type { ProField } from '../../entity'
@@ -11,11 +11,16 @@ import {
   NFormItem,
   NButton,
   NSpace,
-  FormInst,
+  type FormInst,
 } from 'naive-ui'
 import { type ProFieldColumn } from '../../entity'
 import type { ProFormProps } from '../props/ProFormProps'
+import { createEventBus } from '../../utils/eventBus'
 import { transformProps } from '../../utils/propsTransform'
+
+const eventBus = createEventBus()
+
+provide('eventBus', eventBus)
 
 const props = withDefaults(defineProps<ProFormProps>(), {
   columns: () => [],
@@ -146,7 +151,7 @@ const renderColumns = computed(() => {
               current[d] = model.value[d]
             } else {
               current[d] = {}
-              current = current[key]
+              current = current[d]
             }
           })
         }
@@ -160,7 +165,7 @@ const renderColumns = computed(() => {
       if (item.dependencies) {
         params = getParamsByDependencies(item.dependencies)
       }
-      return transformProps(item, params)
+      return transformProps<ProField>(item, params)
     })
     .filter(item => !item.hidden)
 })

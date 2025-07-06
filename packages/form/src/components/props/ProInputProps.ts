@@ -6,5 +6,7 @@ export type ProInputProps = Omit<ProField, 'key'> & {
   /**
    * 类型, 可以是 text' | 'password' | 'textarea';
    */
-  type?: ProInputType;
+  type?: ProInputType
+
+  prop?: string
 }

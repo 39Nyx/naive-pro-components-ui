@@ -22,6 +22,11 @@ export type ProField = {
   valueType?: 'input' | 'select' | 'inputNumber' | 'datePicker'
 
   /**
+   * 表单项的初始值
+   */
+  value?: any
+
+  /**
    * 字段描述
    */
   placeholder?: string
@@ -30,6 +35,11 @@ export type ProField = {
    * 是否禁用
    */
   disabled?: boolean
+
+  /**
+   * 是否只读
+   */
+  readonly?: boolean | ((value: any) => boolean)
 
   /**
    * 是否显示清除按钮
