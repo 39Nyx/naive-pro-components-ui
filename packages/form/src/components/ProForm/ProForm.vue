@@ -15,6 +15,7 @@ import {
 } from 'naive-ui'
 import { type ProFieldColumn } from '../../entity'
 import type { ProFormProps } from '../props/ProFormProps'
+import { transformProps } from '../../utils/propsTransform'
 
 const props = withDefaults(defineProps<ProFormProps>(), {
   columns: () => [],
@@ -38,7 +39,9 @@ function getFieldDefaultValue(column: ProFieldColumn) {
     inputNumber: null,
     datePicker: null,
   }
-  if (
+  if (Object.hasOwnProperty.call(column, 'value')) {
+    return column.value
+  } else if (
     column.valueType &&
     Object.hasOwnProperty.call(defaultValue, column.valueType)
   ) {
@@ -65,8 +68,9 @@ watch(
 
 function fieldProps(column: ProFieldColumn): any {
   return {
-    ...omit(column, ['key', 'span', 'hidden', 'dependencies', 'controls']),
+    ...omit(column, ['key', 'span', 'hidden', 'controls', 'value']),
     clearable: column.clearable === undefined ? true : column.clearable,
+    prop: column.key,
   }
 }
 
@@ -119,42 +123,46 @@ function submitForm(e: MouseEvent) {
 }
 
 const renderColumns = computed(() => {
-  return props.columns.filter((item: ProField) => {
-    if (typeof item?.hidden === 'function') {
-      const params: any = {}
-      if (item.dependencies) {
-        item.dependencies.forEach(dep => {
-          if (typeof dep === 'string') {
-            params[dep] = model.value[dep]
-          } else if (Array.isArray(dep)) {
-            if (dep.length < 1) {
-              return
-            } else if (dep.length === 1) {
-              params[dep[0]] = model.value[dep[0]]
-              return
-            } else if (dep.length > 1) {
-              if (!Object.hasOwnProperty.call(params, dep[0])) {
-                params[dep[0]] = {}
-              }
-              let current = params[dep[0]]
-              dep.forEach((d, index) => {
-                if (index === 0) {
-                  return
-                } else if (index === dep.length - 1) {
-                  current[d] = model.value[d]
-                } else {
-                  current[d] = {}
-                  current = current[key]
-                }
-              })
-            }
+  const getParamsByDependencies = (dependencies: string[] | string[][]) => {
+    const params: any = {}
+    dependencies.forEach(dep => {
+      if (typeof dep === 'string') {
+        params[dep] = model.value[dep]
+      } else if (Array.isArray(dep)) {
+        if (dep.length < 1) {
+          return
+        } else if (dep.length === 1) {
+          params[dep[0]] = model.value[dep[0]]
+          return
+        } else if (dep.length > 1) {
+          if (!Object.hasOwnProperty.call(params, dep[0])) {
+            params[dep[0]] = {}
           }
-        })
+          let current = params[dep[0]]
+          dep.forEach((d, index) => {
+            if (index === 0) {
+              return
+            } else if (index === dep.length - 1) {
+              current[d] = model.value[d]
+            } else {
+              current[d] = {}
+              current = current[key]
+            }
+          })
+        }
       }
-      return !item.hidden(params)
-    }
-    return !item.hidden
-  })
+    })
+    return params
+  }
+  return props.columns
+    .map(item => {
+      let params: any = {}
+      if (item.dependencies) {
+        params = getParamsByDependencies(item.dependencies)
+      }
+      return transformProps(item, params)
+    })
+    .filter(item => !item.hidden)
 })
 
 defineExpose({
