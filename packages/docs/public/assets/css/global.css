@@ -1,0 +1,6 @@
+@media (min-width: 1600px) {
+  .layoutkit-center > .layoutkit-flexbox {
+    max-width: inherit;
+    width: 88%;
+  }
+}

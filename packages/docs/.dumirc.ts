@@ -20,5 +20,8 @@ export default defineConfig({
       { title: '组件', link: '/comes/form' },
     ],
     github: 'https://github.com/KuangPF/dumi-theme-antd'
-  }
+  },
+  styles: [
+    '/naive-pro-components-ui/docs/assets/css/global.css'
+  ]
 });
