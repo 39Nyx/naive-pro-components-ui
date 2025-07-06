@@ -30,6 +30,14 @@ group:
 
 <code src="./demos/ChainedFormDemo.vue"></code>
 
+### 禁用联动
+
+对于一些表单, 可能需要满足某些条件之后才能输入，这时候可以通过设置`disabled`属性为一个函数来实现禁用, 或者通过设置`readonly`属性为一个函数来实现只读
+
+<code src="./demos/DisabledFormDemo.vue"></code>
+
+### 数据联动
+
 ## 自定义表单组件
 
 ## 表单提交
