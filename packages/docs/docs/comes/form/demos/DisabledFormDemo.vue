@@ -30,7 +30,7 @@ const columns: Ref<ProField[]> = ref([
     readonly: ({ age }) => {
       return age < 18
     },
-    value: '翻斗大街翻斗花园2号楼1001室'
+    defaultValue: '翻斗大街翻斗花园2号楼1001室'
   }
 ])
 

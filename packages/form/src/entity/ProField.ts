@@ -24,7 +24,7 @@ export type ProField = {
   /**
    * 表单项的初始值
    */
-  value?: any
+  defaultValue?: any
 
   /**
    * 字段描述
@@ -34,7 +34,7 @@ export type ProField = {
   /**
    * 是否禁用
    */
-  disabled?: boolean
+  disabled?: boolean | ((value: any) => boolean)
 
   /**
    * 是否只读

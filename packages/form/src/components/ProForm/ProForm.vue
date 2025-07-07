@@ -44,8 +44,8 @@ function getFieldDefaultValue(column: ProFieldColumn) {
     inputNumber: null,
     datePicker: null,
   }
-  if (Object.hasOwnProperty.call(column, 'value')) {
-    return column.value
+  if (Object.hasOwnProperty.call(column, 'defaultValue')) {
+    return column.defaultValue
   } else if (
     column.valueType &&
     Object.hasOwnProperty.call(defaultValue, column.valueType)
