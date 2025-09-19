@@ -4,11 +4,9 @@ export default defineConfig({
   base: '/naive-pro-components-ui/docs/',
   publicPath: '/naive-pro-components-ui/docs/',
   outputPath: 'docs-dist',
-  presets: [require.resolve('@dumijs/preset-vue')],
-  vue: {
-    compiler: {
-      babelStandaloneCDN: '/naive-pro-components-ui/docs/js/babel.min.js',
-    },
+  skk: {
+    enableVue: true,
+    fileTree: true,
   },
   themeConfig: {
     name: 'naiveProComponents',
