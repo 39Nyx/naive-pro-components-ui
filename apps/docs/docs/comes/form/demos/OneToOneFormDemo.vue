@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type ProField, ProForm } from '@39nyx/naive-pro-components';
+import { type ProField, ProForm } from '@39nyx/pro-components';
 import { type Ref, ref } from 'vue';
 
 const columns: Ref<ProField[]> = ref([

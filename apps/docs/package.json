@@ -96,7 +96,6 @@
   },
   "dependencies": {
     "@39nyx/dumi-theme-skk": "^1.4.4",
-    "@39nyx/naive-pro-components": "workspace:^",
     "@dumijs/preset-vue": "^2.4.14",
     "vue": "^3.5.17"
   }

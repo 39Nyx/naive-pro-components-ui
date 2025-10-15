@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@39nyx/low-code": "workspace:^",
-    "@39nyx/naive-pro-components": "workspace:^",
+    "@39nyx/pro-components": "workspace:^",
     "@vicons/ionicons5": "^0.13.0",
     "axios": "^1.10.0",
     "lodash": "^4.17.21",

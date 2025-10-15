@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { ProLayout } from '@39nyx/naive-pro-components'
+import { ProLayout } from '@39nyx/pro-components'
 import FormRouter from '../module/form/router/index'
 import TableRouter from '../module/table/router/index'
 

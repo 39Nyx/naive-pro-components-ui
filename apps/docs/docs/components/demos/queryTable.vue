@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type ProColumns, ProTable } from '@39nyx/naive-pro-components';
+import { type ProColumns, ProTable } from '@39nyx/pro-components';
 
 const columns: ProColumns[] = [
   {

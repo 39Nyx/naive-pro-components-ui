@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type ProField, ProForm } from '@39nyx/naive-pro-components';
+import { type ProField, ProForm } from '@39nyx/pro-components';
 import type { FormItemRule } from 'naive-ui';
 import { type Ref, ref } from 'vue';
 
