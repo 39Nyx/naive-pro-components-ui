@@ -6,6 +6,7 @@ export default defineConfig({
   outputPath: 'docs-dist',
   skk: {
     enableVue: true,
+    vueJsx: true,
     fileTree: true,
   },
   themeConfig: {
