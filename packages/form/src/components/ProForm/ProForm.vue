@@ -1,222 +1,56 @@
 <script setup lang="ts">
-import { computed, type Ref, ref, useTemplateRef, watch, provide } from 'vue'
-import { omit } from 'lodash'
-import ProFormFieldRender from '../ProFormFieldRender/ProFormFieldRender'
-import type { ProField } from '../../entity'
-import {
-  NCard,
-  NForm,
-  NGrid,
-  NGi,
-  NFormItem,
-  NButton,
-  NSpace,
-  type FormInst,
-} from 'naive-ui'
-import { type ProFieldColumn } from '../../entity'
-import type { ProFormProps } from '../props/ProFormProps'
-import { createEventBus } from '../../utils/eventBus'
-import { transformProps } from '../../utils/propsTransform'
+import { NForm, NFormItem, NGi, NGrid } from 'naive-ui'
+import { type ProFormProps } from '@39nyx/model'
+import { computed, useSlots } from 'vue'
 
-const eventBus = createEventBus()
-
-provide('eventBus', eventBus)
-
-const props = withDefaults(defineProps<ProFormProps>(), {
-  columns: () => [],
-  submitter: () => {
-    return {
-      searchConfig: {
-        submitText: '提交',
-        resetText: '重置',
-      },
-    }
-  },
-  onFinish: async () => {},
+withDefaults(defineProps<ProFormProps>(), {
+  model: () => ({}),
+  rules: () => ({}),
+  labelPlacement: 'left',
 })
-
-const model: Ref<any> = ref({})
-const formRef = useTemplateRef<FormInst>('formRef')
-
-function getFieldDefaultValue(column: ProFieldColumn) {
-  const defaultValue: any = {
-    select: null,
-    inputNumber: null,
-    datePicker: null,
-  }
-  if (Object.hasOwnProperty.call(column, 'defaultValue')) {
-    return column.defaultValue
-  } else if (
-    column.valueType &&
-    Object.hasOwnProperty.call(defaultValue, column.valueType)
-  ) {
-    return defaultValue[column.valueType]
-  }
-  return ''
-}
-
-watch(
-  () => props.columns,
-  newVal => {
-    if (!newVal) {
-      return
-    }
-    model.value = newVal.reduce((acc: Record<string, any>, cur: ProField) => {
-      acc[cur.key] = getFieldDefaultValue(cur)
-      return acc
-    }, {})
-  },
-  {
-    immediate: true,
-  },
-)
-
-function fieldProps(column: ProFieldColumn): any {
-  return {
-    ...omit(column, ['key', 'span', 'hidden', 'controls', 'value']),
-    clearable: column.clearable === undefined ? true : column.clearable,
-    prop: column.key,
-  }
-}
 
 const cols: number = 24
 
-const submitSpan = computed(() => {
-  const result = props.columns.reduce(
-    (pre, current) => {
-      if (typeof current.span === 'number') {
-        if (pre.span + current.span > cols) {
-          pre.span = current.span
-        } else {
-          pre.span += current.span
-        }
-      }
-      if (typeof current.span === 'undefined') {
-        pre.span = 0
-      }
-      return pre
-    },
-    {
-      span: 0,
-    },
-  )
-  return {
-    span: cols - result.span || cols,
+const slots = useSlots()
+
+const normalizedChildren = computed(() => {
+  if (!slots.default || typeof slots.default !== 'function') {
+    return []
   }
-})
-
-const submitLoading = ref(false)
-
-function submitForm(e: MouseEvent) {
-  e.preventDefault()
-  submitLoading.value = true
-  formRef.value?.validate(valid => {
-    console.log(valid)
-    if (valid) {
-      submitLoading.value = false
-      return
+  return slots.default().map(child => {
+    // 提取子组件的栅格配置
+    const childProps: any = child.props || {}
+    return {
+      ...childProps,
+      component: child,
     }
-    props
-      .onFinish(model.value)
-      .then(() => {
-        // 空函数
-      })
-      .finally(() => {
-        submitLoading.value = false
-      })
   })
-}
-
-const renderColumns = computed(() => {
-  const getParamsByDependencies = (dependencies: string[] | string[][]) => {
-    const params: any = {}
-    dependencies.forEach(dep => {
-      if (typeof dep === 'string') {
-        params[dep] = model.value[dep]
-      } else if (Array.isArray(dep)) {
-        if (dep.length < 1) {
-          return
-        } else if (dep.length === 1) {
-          params[dep[0]] = model.value[dep[0]]
-          return
-        } else if (dep.length > 1) {
-          if (!Object.hasOwnProperty.call(params, dep[0])) {
-            params[dep[0]] = {}
-          }
-          let current = params[dep[0]]
-          dep.forEach((d, index) => {
-            if (index === 0) {
-              return
-            } else if (index === dep.length - 1) {
-              current[d] = model.value[d]
-            } else {
-              current[d] = {}
-              current = current[d]
-            }
-          })
-        }
-      }
-    })
-    return params
-  }
-  return props.columns
-    .map(item => {
-      let params: any = {}
-      if (item.dependencies) {
-        params = getParamsByDependencies(item.dependencies)
-      }
-      return transformProps<ProField>(item, params)
-    })
-    .filter(item => !item.hidden)
-})
-
-defineExpose({
-  submitForm,
 })
 </script>
 
 <template>
-  <NCard :bordered="true" class="card-wrapper">
-    <NForm
-      label-placement="left"
-      label-width="auto"
-      :model="model"
-      ref="formRef"
-    >
-      <NGrid :cols="cols" item-responsive :x-gap="12" :responsive="'screen'">
-        <NGi
-          v-for="column in renderColumns"
-          :key="column.key"
-          :span="column.span || 24"
+  <NForm
+    :model="model"
+    :rules="rules"
+    label-placement="left"
+    label-width="auto"
+  >
+    <NGrid :cols="cols" item-responsive :x-gap="12" :responsive="'screen'">
+      <NGi
+        v-for="(column, index) in normalizedChildren"
+        :key="column.path || index"
+        :span="column.span || 24"
+      >
+        <NFormItem
+          :label="column.title"
+          :path="column.path"
+          :rule="column.rules"
         >
-          <NFormItem
-            :label="column.title"
-            :path="column.key"
-            :rule="column.rules"
-          >
-            <ProFormFieldRender
-              v-model:value="model[column.key]"
-              v-bind="fieldProps(column)"
-            />
-          </NFormItem>
-        </NGi>
-        <NGi v-bind="submitSpan">
-          <NFormItem label=" ">
-            <NSpace>
-              <NButton>{{ props.submitter.searchConfig?.resetText }}</NButton>
-              <NButton
-                type="primary"
-                :loading="submitLoading"
-                @click="submitForm"
-              >
-                {{ props.submitter.searchConfig?.submitText }}
-              </NButton>
-            </NSpace>
-          </NFormItem>
-        </NGi>
-      </NGrid>
-    </NForm>
-  </NCard>
+          <component :is="column.component" />
+        </NFormItem>
+      </NGi>
+    </NGrid>
+  </NForm>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped></style>
